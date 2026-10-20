@@ -1,0 +1,37 @@
+{
+  "rows": 35040,
+  "columns": 11,
+  "missing_cells": 0,
+  "exact_duplicate_rows": 0,
+  "duplicate_timestamps": 0,
+  "first_recorded_timestamp": "2018-01-01 00:00:00",
+  "last_recorded_timestamp": "2018-12-31 23:45:00",
+  "first_adopted_timestamp": "2018-01-01 00:15:00",
+  "last_adopted_timestamp": "2019-01-01 00:00:00",
+  "midnight_timestamps_shifted": 365,
+  "calendar_values_changed": {
+    "Day_of_week": 365,
+    "WeekStatus": 104,
+    "NSM": 0
+  },
+  "adopted_duplicate_timestamps": 0,
+  "missing_15min_timestamps_within_bounds": 0,
+  "original_backward_timestamp_steps": 365,
+  "midnight_rows": 365,
+  "rows_removed": 0,
+  "measurements_changed": 0,
+  "calendar_checks": {
+    "Day_of_week_mismatches": 0,
+    "WeekStatus_mismatches": 0,
+    "NSM_mismatches": 0
+  },
+  "timestamp_policy": "Shift original midnight dates forward one day; derive calendar fields from adopted endpoint timestamps; preserve measurement order.",
+  "timestamp_limitation": "Next-day midnight is a team assumption based on source row order, not independently confirmed author intent.",
+  "source_sha256": "9b1cee6f9cb9cd9df2b95814ca90a9a2ff15b7f5f1fba0fae3c643e82072eacc",
+  "checked_sha256": "f21a6d6099fdc70de195722f17f69c83e61f24983e7b944baf29e04430417c69",
+  "environment": {
+    "python": "3.12.14",
+    "pandas": "3.0.6",
+    "numpy": "2.5.3"
+  }
+}

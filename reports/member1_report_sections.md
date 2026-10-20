@@ -1,0 +1,13 @@
+# Data Description and Data Preprocessing — Fahim
+
+## Dataset and audit
+The UCI Steel Industry Energy Consumption dataset (https://doi.org/10.24432/C52G8C) contains 35,040 rows and 11 columns. Usage_kWh records electricity consumption. The audit found no missing cells, blank strings, exact duplicate rows or duplicate timestamps. Repeated measurements at different times are not automatically treated as duplicate records. Numeric values were finite and nonnegative; power factors were between 0 and 100. These checks do not establish that every sensor reading is accurate.
+
+## Adopted timestamp interpretation
+In the original row order, each recorded date's 00:00 row follows its 23:45 row. The team interprets these records as the following day's interval endpoint. Accordingly, 365 midnight timestamps were shifted forward by one day. This is an assumption based on source ordering, not independent confirmation of the author's intention. It supersedes our preliminary approach of sorting literal timestamps. The resulting series runs from 2018-01-01 00:15:00 to 2019-01-01 00:00:00 in uninterrupted 15-minute steps, preserving the original measurement order. Source clarification or a sensitivity analysis could assess this remaining semantic uncertainty.
+
+## Calendar consistency and preservation
+Day_of_week, WeekStatus and NSM were recalculated from adopted endpoint timestamps. Changes: {'Day_of_week': 365, 'WeekStatus': 104, 'NSM': 0}. This is an endpoint-based calendar convention, including at midnight; original labels remain in the raw file and audit. Load_Type was retained as supplied, without assuming that it is a known production schedule. All 35,040 rows and original measurements were retained. No imputation, capping, scaling, encoding or statistical outlier removal was performed. The unchanged raw CSV, source hash, row lineage and midnight change audit preserve traceability. Export/reload checks confirmed exact preservation of all non-calendar measurement and label columns.
+
+## Handover
+Use the updated steel_checked.csv and parse date as ISO datetime. Kapiln will define target-aligned chronological splits, historical features and benchmarks. Kennard should use the agreed training period for exploratory decisions. Daniel will train and select models using training/validation data; Feng will evaluate frozen choices on test data. Calendar inputs for the future target interval are known in advance. Electrical measurements must be historical only. CO2(tCO2) should be excluded from predictors; Load_Type needs an explicit availability decision before use. Fit any learned preprocessing only on training data. Forecasting performance does not demonstrate actual energy savings.
