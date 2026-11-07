@@ -1,0 +1,20 @@
+{
+  "target": "Usage_kWh of the next 15-minute interval (column target_usage_kwh, indexed by its own timestamp)",
+  "warm_up_history": "2018-01-01 00:15 to 2018-01-08 00:00 (lags only, not scored)",
+  "train": {
+    "first_target": "2018-01-08 00:15:00",
+    "last_target": "2018-09-16 00:00:00",
+    "rows": 24096
+  },
+  "validation": {
+    "first_target": "2018-09-16 00:15:00",
+    "last_target": "2018-11-08 00:00:00",
+    "rows": 5088
+  },
+  "test": {
+    "first_target": "2018-11-08 00:15:00",
+    "last_target": "2019-01-01 00:00:00",
+    "rows": 5184
+  },
+  "rule": "Chronological, no shuffling. Fit learned preprocessing on train only (train+validation for the final refit). Never tune on test."
+}

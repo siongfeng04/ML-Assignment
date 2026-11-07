@@ -1,0 +1,79 @@
+{
+  "target": "target_usage_kwh",
+  "selected_features": [
+    "tod_sin",
+    "tod_cos",
+    "hour",
+    "day_of_week",
+    "is_weekend",
+    "usage_lag_1",
+    "usage_lag_2",
+    "usage_lag_3",
+    "usage_lag_4",
+    "usage_diff_1",
+    "lag_reactive_kvarh_lag_1",
+    "lead_reactive_kvarh_lag_1",
+    "lag_power_factor_lag_1",
+    "lead_power_factor_lag_1"
+  ],
+  "categorical_features": [
+    "day_of_week",
+    "hour"
+  ],
+  "all_candidate_groups": {
+    "calendar": [
+      "tod_sin",
+      "tod_cos",
+      "hour",
+      "day_of_week",
+      "is_weekend"
+    ],
+    "recent_usage": [
+      "usage_lag_1",
+      "usage_lag_2",
+      "usage_lag_3",
+      "usage_lag_4",
+      "usage_diff_1"
+    ],
+    "seasonal_lags": [
+      "usage_lag_96",
+      "usage_lag_672"
+    ],
+    "rolling_stats": [
+      "usage_roll_mean_4",
+      "usage_roll_std_4",
+      "usage_roll_mean_16",
+      "usage_roll_mean_96",
+      "usage_roll_max_96"
+    ],
+    "electrical_lags": [
+      "lag_reactive_kvarh_lag_1",
+      "lead_reactive_kvarh_lag_1",
+      "lag_power_factor_lag_1",
+      "lead_power_factor_lag_1"
+    ],
+    "load_type_lag": [
+      "load_type_lag_1"
+    ]
+  },
+  "benchmarks": {
+    "Persistence": "bench_persistence",
+    "Daily seasonal": "bench_daily_seasonal",
+    "Weekly seasonal": "bench_weekly_seasonal"
+  },
+  "selection_rule": "Core groups ['calendar', 'recent_usage'] always kept; later groups kept if probe validation RMSE improves by >= 1%.",
+  "excluded": {
+    "CO2(tCO2)": "Near-copy of the target (r ~ 0.99); leakage.",
+    "Same-interval electrical readings / Load_Type": "Not measured at the forecast origin.",
+    "Load_Type at target time": "Not a fixed schedule in this data; kept only as analysis_load_type.",
+    "month": "Validation/test months are outside the training range; would require extrapolation."
+  },
+  "feature_table": "all_datasets/steel_features.csv",
+  "feature_table_sha256_lf": "7c7c127ad54c277a9a3f0def22fe61c1a33711c45b011ac52e71e638b7ec53a9",
+  "environment": {
+    "python": "3.14.6",
+    "pandas": "3.0.3",
+    "numpy": "2.4.6",
+    "scikit-learn": "1.9.0"
+  }
+}

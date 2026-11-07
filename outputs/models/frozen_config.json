@@ -1,0 +1,82 @@
+{
+  "selected_final_model": "Gradient Boosting",
+  "selection_metric": "validation RMSE",
+  "features": [
+    "tod_sin",
+    "tod_cos",
+    "hour",
+    "day_of_week",
+    "is_weekend",
+    "usage_lag_1",
+    "usage_lag_2",
+    "usage_lag_3",
+    "usage_lag_4",
+    "usage_diff_1",
+    "lag_reactive_kvarh_lag_1",
+    "lead_reactive_kvarh_lag_1",
+    "lag_power_factor_lag_1",
+    "lead_power_factor_lag_1"
+  ],
+  "target": "target_usage_kwh",
+  "trained_on": "train + validation targets 2018-01-08 00:15:00 to 2018-11-08 00:00:00 (29,184 rows)",
+  "hyperparameters": {
+    "Linear Regression": "OneHot(hour, day_of_week) + StandardScaler(numeric) + OLS",
+    "Random Forest": {
+      "n_estimators": 200,
+      "max_depth": 16,
+      "min_samples_leaf": 5,
+      "max_features": 0.5
+    },
+    "Gradient Boosting": {
+      "n_estimators": 391,
+      "learning_rate": 0.05,
+      "max_depth": 5,
+      "subsample": 0.8
+    },
+    "random_state": 42
+  },
+  "validation_metrics": {
+    "Gradient Boosting": {
+      "MAE": 4.1312,
+      "RMSE": 8.7747,
+      "R2": 0.9187
+    },
+    "Random Forest": {
+      "MAE": 4.0281,
+      "RMSE": 8.8435,
+      "R2": 0.9174
+    },
+    "Linear Regression": {
+      "MAE": 6.5714,
+      "RMSE": 11.191,
+      "R2": 0.8678
+    },
+    "Persistence": {
+      "MAE": 5.7558,
+      "RMSE": 12.7014,
+      "R2": 0.8297
+    },
+    "Weekly seasonal": {
+      "MAE": 13.0323,
+      "RMSE": 25.0649,
+      "R2": 0.3366
+    },
+    "Daily seasonal": {
+      "MAE": 15.2834,
+      "RMSE": 28.9065,
+      "R2": 0.1177
+    }
+  },
+  "model_files": {
+    "Linear Regression": "outputs/models/linear_regression.joblib",
+    "Random Forest": "outputs/models/random_forest.joblib",
+    "Gradient Boosting": "outputs/models/gradient_boosting.joblib"
+  },
+  "test_protocol": "Load each model with joblib, predict data.loc[data.split == 'test', features], compare with bench_* columns on the same rows. Do not retune.",
+  "environment": {
+    "python": "3.14.6",
+    "scikit-learn": "1.9.0",
+    "pandas": "3.0.3",
+    "numpy": "2.4.6"
+  }
+}
