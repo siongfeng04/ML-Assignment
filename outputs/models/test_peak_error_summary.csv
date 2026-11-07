@@ -1,0 +1,2 @@
+definition,cutoff_kwh,intervals,MAE,RMSE,mean_error_actual_minus_forecast
+actual >= test-set 90th percentile,69.3,520,13.371841092402617,17.122823422396724,7.846882957338411
